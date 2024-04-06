@@ -1,0 +1,112 @@
+﻿@page
+@model QuanLyCuaHang.Pages.MH_Them_HoaDonNhapModel
+@using Entities
+@using XuLyNghiepVu
+@{
+    string kq = string.Empty;
+    string tenHang = string.Empty;
+    string kqThemMatHang = string.Empty;
+    double thanhTien = 0;
+
+    if (Request.Method == "POST")
+    {
+        string maHoaDon = Request.Form["mahoadon"];
+        DateOnly ngayTao = DateOnly.Parse(Request.Form["ngaytao"]);
+        string maHang = Request.Form["mahang"];
+        tenHang = XL_MatHang.LayTenMatHang(maHang);
+        string congTySanXuat = XL_MatHang.LayTenCongTySanXuat(maHang);
+        string loaiHang = XL_MatHang.LayTenLoaiHang(maHang);
+        DateOnly ngaySanXuat = XL_MatHang.LayNgaySanXuat(maHang);
+        DateOnly hanDung = XL_MatHang.LayHanDung(maHang);
+        int soLuong = int.Parse(Request.Form["soluong"]);
+        double giaNhap = double.Parse(Request.Form["gianhap"]);
+        thanhTien = giaNhap * soLuong;
+        int soLuongTonKho = XL_MatHang.LaySoLuongTonKho(maHang);
+
+        HoaDonNhapHang hd;
+        hd.MaHoaDon = maHoaDon;
+        hd.NgayTao = ngayTao;
+        hd.MaHang = maHang;
+        hd.TenHang = tenHang;
+        hd.SoLuong = soLuong;
+        hd.GiaNhap = giaNhap;
+        hd.ThanhTien = thanhTien;
+
+        MatHangTonKho mh;
+        mh.MaHang = maHang;
+        mh.TenHang = tenHang;
+        mh.LoaiHang = loaiHang;
+        mh.CongTySanXuat = congTySanXuat;
+        mh.NgaySanXuat = ngaySanXuat;
+        mh.HanDung = hanDung;
+        mh.SoLuongTonKho = soLuongTonKho + soLuong;
+
+        bool check1 = XL_HoaDonBan.KiemTraMaHoaDon(maHang);
+        bool check2 = XL_MatHang.KiemTraMaHangTrongDanhSachMatHang(maHang);
+        bool check3 = XL_MatHang.KiemTraMaHangTrongDanhSachTonKho(maHang);
+
+        if (check1)
+        {
+            kq = "Mã hóa đơn dã tồn tại!";
+        }
+        else
+        {
+            if (check2)
+            {
+                if (check3)
+                {
+                    kq = XL_HoaDonNhap.ThemHoaDon(hd);
+                    kqThemMatHang = XL_MatHang.SuaMatHangTonKHo(mh);
+                }
+                else
+                {
+                    kq = XL_HoaDonNhap.ThemHoaDon(hd);
+                    kqThemMatHang = XL_MatHang.ThemMatHangTonKho(mh);
+                }
+            }
+            else
+            {
+                kq = "Không tồn tại mặt hàng trong danh sách mặt hàng";
+            }
+        }
+
+        if (string.IsNullOrEmpty(kq))
+        {
+            <script>
+                var message = "Thêm hóa đơn thành công";
+                // Hien thi thong bao
+                alert(message);
+                // Redirect to "MH_DanhSach_HoaDonNhap"
+                window.location.href = "MH_DanhSach_HoaDonNhap";
+            </script>
+        }
+    }
+}
+<div class="div div-space">
+    <h2>Thêm hóa đơn nhập hàng</h2>
+</div>
+
+<div class="div">
+    <form method="post">
+        <label for="mahoadon" class="label-form">Mã hóa đơn</label>
+        <input id="mahoadon" type="text" name="mahoadon" value="" /><br />
+
+        <label for="ngaytao" class="label-form">Ngày tạo</label>
+        <input id="ngaytao" type="date" name="ngaytao" value="" placeholder="dd-mm-yyyy" /><br />
+
+        <label for="mahang" class="label-form">Mã hàng</label><br />
+        <input id="mahang" type="text" name="mahang" value=""/><br />
+
+        <label for="soluong" class="label-form">Số lượng</label>
+        <input id="soluong" type="text" name="soluong" value=""/><br />
+
+        <label for="gianhap" class="label-form">Giá nhập</label>
+        <input id="gianhap" type="text" name="gianhap" value="" /><br />
+
+        <input type="submit" value="Thêm" class="button-them-sua"/>
+    </form>
+    @if(kq != string.Empty )
+    {
+        <h3 class="h3">@kq</h3>
+    }
+</div>

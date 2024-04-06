@@ -1,0 +1,67 @@
+﻿@page
+@model QuanLyCuaHang.Pages.MH_Xoa_HoaDonBanModel
+@using Entities
+@using XuLyNghiepVu
+@{
+    string chuoi = string.Empty;
+    string maHd = Request.Query["mahoadon"];
+    HoaDonBanHang? hd = null;
+    if (!string.IsNullOrEmpty(maHd))
+    {
+        hd = XL_HoaDonBan.DocThongTinChiTietHoaDon(maHd);
+        if (hd == null)
+        {
+            chuoi = "Hóa đơn không tồn tại";
+        }
+        else
+        {
+            if (Request.Method == "POST")
+            {
+                string kq = XL_HoaDonBan.XoaHoaDon(maHd);
+                chuoi = kq;
+                if (string.IsNullOrEmpty(chuoi))
+                {
+                    <script>
+                        var message = "Xóa hóa đơn thành công";
+                        // Hien thi thong bao
+                        alert(message);
+                        // Redirect to "MH_DanhSach_HoaDonBan"
+                        window.location.href = "MH_DanhSach_HoaDonBan";
+                    </script>
+                }
+            }
+        }
+    }
+    else
+    {
+        chuoi = "Không có tham số mã hóa đơn";
+    }
+}
+
+<div>
+    @if (hd != null)
+    {
+        <div>
+            <p style="font-size: 30px;">Bạn có muốn xóa hóa đơn mã: <b style="color: #ff0047">@hd.Value.MaHoaDon</b> không?</p>
+            <ul>
+                <li><span class="label">Mã hóa đơn</span>: @hd.Value.MaHoaDon</li>
+                <li><span class="label">Ngày tạo</span>: @hd.Value.NgayTao</li>
+                <li><span class="label">Mã hàng</span>: @hd.Value.MaHang</li>
+                <li><span class="label">Tên hàng</span>: @hd.Value.TenHang</li>
+                <li><span class="label">Số lượng</span>: @hd.Value.SoLuong</li>
+                <li><span class="label">Giá bán</span>: @hd.Value.GiaBan</li>
+                <li><span class="label">Thành tiền</span>: @hd.Value.ThanhTien</li>
+            </ul>
+        </div>
+        <div class="button-container">
+            <form method="post">
+                <input type="submit" value="Xóa" class="button-xoa">
+            </form>
+            <a href="MH_DanhSach_LoaiHang"><button class="button-cancel">Cancel</button></a>
+        </div>
+    }
+    @if (chuoi != string.Empty)
+    {
+        <div>@chuoi</div>
+    }
+</div>

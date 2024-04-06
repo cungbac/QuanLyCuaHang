@@ -1,0 +1,123 @@
+﻿@page
+@model QuanLyCuaHang.Pages.MH_Sua_HoaDonBanModel
+@using Entities
+@using XuLyNghiepVu
+@{
+    string kq = string.Empty;
+    string maHd = Request.Query["mahoadon"];
+    HoaDonBanHang? hd = null;
+    if (!string.IsNullOrEmpty(maHd))
+    {
+        hd = XL_HoaDonBan.DocThongTinChiTietHoaDon(maHd);
+        if (hd == null)
+        {
+            kq = "Hóa đơn không tồn tại";
+        }
+        else
+        {
+            if (Request.Method == "POST")
+            {
+                DateOnly ngayTao = DateOnly.Parse(Request.Form["ngaytao"]);
+                string maHang = Request.Form["mahang"];
+                string tenHang = Request.Form["tenhang"];
+                string congTySanXuat = XL_MatHang.LayTenCongTySanXuat(maHang);
+                string loaiHang = XL_MatHang.LayTenLoaiHang(maHang);
+                DateOnly ngaySanXuat = XL_MatHang.LayNgaySanXuat(maHang);
+                DateOnly hanDung = XL_MatHang.LayHanDung(maHang);
+                int soLuongBanMoi = int.Parse(Request.Form["soluong"]);
+                double giaBan = double.Parse(Request.Form["giaban"]);
+                double thanhTien = soLuongBanMoi * giaBan;
+                int soLuongTonKho = XL_MatHang.LaySoLuongTonKho(maHang);
+                int soLuongBanCu = XL_HoaDonBan.LaySoLuongBan(maHd);
+
+                HoaDonBanHang hoaDonMoi = hd.Value;
+                hoaDonMoi.NgayTao = ngayTao;
+                hoaDonMoi.MaHang = maHang;
+                hoaDonMoi.TenHang = tenHang;
+                hoaDonMoi.SoLuong = soLuongBanMoi;
+                hoaDonMoi.GiaBan = giaBan;
+                hoaDonMoi.ThanhTien = thanhTien;
+
+                MatHangTonKho mh;
+                mh.MaHang = maHang;
+                mh.TenHang = tenHang;
+                mh.LoaiHang = loaiHang;
+                mh.CongTySanXuat = congTySanXuat;
+                mh.NgaySanXuat = ngaySanXuat;
+                mh.HanDung = hanDung;
+                mh.SoLuongTonKho = soLuongTonKho + soLuongBanCu - soLuongBanMoi;
+
+                bool check = XL_MatHang.KiemTraMaHangTrongDanhSachTonKho(maHang);
+
+                if (check)
+                {
+                    if (soLuongBanMoi > soLuongTonKho)
+                    {
+                        kq = "Số lượng bán vượt quá số lượng tồn kho!";
+                    }
+                    else
+                    {
+                        kq = XL_HoaDonBan.SuaHoaDon(hoaDonMoi);
+                    }
+                }
+                else
+                {
+                    kq = "Không tồn tại mặt hàng trong danh sách tồn kho!";
+                }
+
+                if (string.IsNullOrEmpty(kq))
+                {
+                    <script>
+                        var message = "Sửa hóa đơn thành công";
+                        // Hien thi thong bao
+                        alert(message);
+                        // Redirect to "MH_DanhSach_HoaDonBan"
+                        window.location.href = "MH_DanhSach_HoaDonBan";
+                    </script>
+                }
+            }
+        }
+    }
+    else
+    {
+        kq = "Không có tham số mã hóa đơn";
+    }
+}
+
+<div class="div div-space">
+    <h2>Sửa hóa đơn bán hàng</h2>
+</div>
+
+<div class="div">
+    @if (hd != null)
+    {
+        <form method="post">
+            <label for="mahoadon" class="label-form">Mã hóa đơn</label>
+            <input id="mahoadon" type="text" readonly name="mahoadon" value="@hd.Value.MaHoaDon"><br>
+
+            <label for="ngaytao" class="label-form">Ngày tạo</label>
+            <input id="ngaytao" type="text" name="ngaytao" value="@hd.Value.NgayTao"><br>
+
+            <label for="mahang" class="label-form">Mã hàng</label>
+            <input id="mahang" type="text" name="mahang" value="@hd.Value.MaHang"><br>
+
+            <lable for="tenhang" class="label-form">Tên hàng</lable>
+            <input id="tenhang" type="text" name="tenhang" value="@hd.Value.TenHang"><br>
+
+            <label for="soluong" class="label-form">Số lượng</label>
+            <input id="soluong" type="text" name="soluong" value="@hd.Value.SoLuong"><br>
+
+            <label for="giaban" class="label-form">Giá bán</label>
+            <input id="giaban" type="text" name="giaban" value="@hd.Value.GiaBan"><br>
+
+            <lable for="thanhtien" class="label-form">Thành tiền</lable>
+            <input id="thanhtien" type="text" readonly name="thanhtien" value="@hd.Value.ThanhTien"><br>
+
+            <input type="submit" value="Lưu" class="button-them-sua">
+        </form>
+    }
+    @if (kq != string.Empty)
+    {
+        <h3 class="h3">@kq</h3>
+    }
+</div>

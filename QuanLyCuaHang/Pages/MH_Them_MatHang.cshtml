@@ -1,0 +1,81 @@
+﻿@page
+@using Entities
+@using XuLyNghiepVu
+@model QuanLyCuaHang.Pages.MH_Them_MatHangModel
+@{
+    string kq = string.Empty;
+    string[] tlh = XL_LoaiHang.LayDanhSachTenLoaiHang();
+    if (Request.Method == "POST")
+    {
+        MatHang mh;
+        mh.MaHang = Request.Form["mahang"];
+        mh.TenHang = Request.Form["tenhang"];
+        mh.HanDung = DateOnly.Parse(Request.Form["handung"]);
+        mh.CongTySanXuat = Request.Form["congtysanxuat"];
+        mh.NgaySanXuat = DateOnly.Parse(Request.Form["ngaysanxuat"]);
+        mh.LoaiHang = Request.Form["loaihang"];
+        mh.GiaBan = double.Parse(Request.Form["giaban"]);
+
+        bool check = XL_MatHang.KiemTraMaHangTrongDanhSachMatHang(Request.Form["mahang"]);
+
+        if (check)
+        {
+            kq = "Mã hàng đã tồn tại!";
+        }
+        else
+        {
+            kq = XL_MatHang.ThemMatHang(mh);
+        }
+        if (string.IsNullOrEmpty(kq))
+        {
+            <script>
+                var message = "Thêm mặt hàng thành công";
+                // Hien thi thong bao
+                alert(message);
+                // Redirect to "MH_DanhSach_MatHang"
+                window.location.href = "MH_DanhSach_MatHang";
+            </script>
+        }
+    }
+}
+
+<div class="div div-space">
+    <h2>Thêm mặt hàng</h2>
+</div>
+
+<div class="div">
+    <form method="post">
+        <label for="mahang" class="label-form">Mã mặt hàng</label>
+        <input id="mahang" type="text" name="mahang" value="" /><br />
+
+        <label for="tenhang" class="label-form">Tên mặt hàng</label>
+        <input id="tenhang" type="text" name="tenhang" value="" /><br />
+
+        <label for="handung" class="label-form">Hạn sử dụng</label><br />
+        <input id="handung" type="date" name="handung" value="" placeholder="dd-mm-yyyy"/><br />
+
+        <label for="congtysanxuat" class="label-form">Công ty sản xuất</label>
+        <input id="congtysanxuat" type="text" name="congtysanxuat" value="" /><br />
+
+        <label for="ngaysanxuat" class="label-form">Ngày sản xuất</label>
+        <input id="ngaysanxuat" type="date" name="ngaysanxuat" value="" placeholder="dd-mmm-yyyy"/><br />
+
+        <lable for="loaihang" class="label-form">Loại hàng</lable>
+        <select name="loaihang">
+            <option value="" disabled selected>Chọn loại hàng</option>
+            @foreach (string tenLoaiHang in tlh)
+            {
+                <option name="@tenLoaiHang" value="@tenLoaiHang">@tenLoaiHang</option>
+            }
+        </select>
+
+        <label for="giaban" class="label-form">Giá bán</label>
+        <input id="giaban" type="text" name="giaban" value="" /><br />
+
+        <input type="submit" value="Thêm" class="button-them-sua"/>
+    </form>
+    @if(kq != string.Empty )
+    {
+        <h3 class="h3">@kq</h3>
+    }
+</div>

@@ -1,0 +1,67 @@
+﻿@page
+@using Entities
+@using XuLyNghiepVu
+@model QuanLyCuaHang.Pages.MH_Sua_LoaiHangModel
+@{
+    string kq = string.Empty;
+    string maLoaiHang = Request.Query["maloaihang"];
+    LoaiHang? lh = null;
+
+    if (!string.IsNullOrEmpty(maLoaiHang))
+    {
+        lh = XL_LoaiHang.DocThongTinChiTietLoaiHang(maLoaiHang);
+        if (lh == null)
+        {
+            kq = "Loại hàng không tồn tại";
+        }
+        else
+        {
+            if (Request.Method == "POST")
+            {
+                string tenLoaiHang = Request.Form["tenloaihang"];
+
+                LoaiHang loaiHangMoi = lh.Value;
+                loaiHangMoi.TenLoaiHang = tenLoaiHang;
+
+                kq = XL_LoaiHang.SuaLoaiHang(loaiHangMoi);
+                if (string.IsNullOrEmpty(kq))
+                {
+                    <script>
+                        var message = "Sửa loại hàng thành công";
+                        // Hien thi thong bao
+                        alert(message);
+                        // Redirect to "MH_DanhSach_LoaiHang"
+                        window.location.href = "MH_DanhSach_LoaiHang";
+                    </script>
+                }
+            }
+        }
+    }
+    else
+    {
+        kq = "Không có tham số mã loại hàng";
+    }
+}
+
+<div class="div div-space">
+    <h2>Sửa loại hàng</h2>
+</div>
+
+<div class="div">
+    @if (lh != null)
+    {
+        <form method="post">
+            <label for="maloaihang" class="label-form">Mã loại hàng</label>
+            <input id="maloaihang" type="text" readonly name="maloaihang" value="@lh.Value.MaLoaiHang">
+
+            <label for="tenloaihang" class="label-form">Tên loại hàng</label>
+            <input id="tenloaihang" type="text" name="tenloaihang" value="@lh.Value.TenLoaiHang">
+
+            <input type="submit" value="Lưu" class="button-them-sua">
+        </form>
+    }
+    @if (kq != string.Empty)
+    {
+        <h3 class="h3">@kq</h3>
+    }
+</div>
