@@ -1,0 +1,51 @@
+﻿@page
+@model WEB.Pages.MH_DanhSach_MatHang_HetHan
+@using Entities;
+@{
+}
+
+<div class="div">
+    <h2 class="h2" style="text-align: center;">Phần mềm quản lý cửa hàng</h2>
+</div>
+
+<div class="div div-space">
+    <a href="MH_DanhSach_MatHang"><button class="button">Danh sách mặt hàng</button></a>
+    <a href="MH_DanhSach_LoaiHang"><button class="button">Danh Sách loại hàng</button></a>
+    <a href="MH_DanhSach_HoaDonBan"><button class="button">Hóa đơn bán hàng</button></a>
+    <a href="MH_DanhSach_HoaDonNhap"><button class="button">Hóa đơn nhập hàng</button></a>
+    <a href="MH_DanhSach_MatHang_TonKho"><button class="button">Danh sách tồn kho</button></a>
+    <a href="MH_DanhSach_MatHang_HetHan"><button class="button button-highlight">Danh sách hết hạn</button></a>
+</div>
+
+<form method="post">
+    <label for="fname">Từ khóa:</label><br />
+    <input type="text" id="fname" name="tukhoa" value="" />
+    <input type="submit" value="Tìm kiếm" />
+</form>
+
+
+<div>
+    <table>
+        <tr>
+            <th>Mã hàng</th>
+            <th>Tên hàng</th>
+            <th>Loại hàng</th>
+            <th>Công ty sản xuất</th>
+            <th>Ngày sản xuất</th>
+            <th>Hạn sử dụng</th>
+            <th>Số lượng</th>
+        </tr>
+        @foreach (MatHang mh in Model.dsMatHang)
+        {
+            <tr>
+                <td>@mh.MaHang</td>
+                <td>@mh.TenHang</td>
+                <td>@mh.LoaiHang</td>
+                <td>@mh.CongTySanXuat</td>
+                <td>@mh.NgaySanXuat</td>
+                <td>@mh.HanDung</td>
+                <td>@mh.SoLuongTonKho</td>
+            </tr>
+        }
+    </table>
+</div>

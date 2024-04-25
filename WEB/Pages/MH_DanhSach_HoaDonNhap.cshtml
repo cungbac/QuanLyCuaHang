@@ -1,0 +1,56 @@
+﻿@page
+@model WEB.Pages.MH_DanhSach_HoaDonNhap
+@using Entities;
+@{
+}
+
+<div class="div">
+    <h2 class="h2" style="text-align: center;">Phần mềm quản lý cửa hàng</h2>
+</div>
+
+<div class="div div-space">
+    <a href="MH_DanhSach_MatHang"><button class="button">Danh sách mặt hàng</button></a>
+    <a href="MH_DanhSach_LoaiHang"><button class="button">Danh Sách loại hàng</button></a>
+    <a href="MH_DanhSach_HoaDonBan"><button class="button">Hóa đơn bán hàng</button></a>
+    <a href="MH_DanhSach_HoaDonNhap"><button class="button button-highlight">Hóa đơn nhập hàng</button></a>
+    <a href="MH_DanhSach_MatHang_TonKho"><button class="button">Danh sách tồn kho</button></a>
+    <a href="MH_DanhSach_MatHang_HetHan"><button class="button">Danh sách hết hạn</button></a>
+</div>
+
+<form method="post">
+    <label for="fname">Từ khóa:</label><br />
+    <input type="text" id="fname" name="tukhoa" value="" />
+    <input type="submit" value="Tìm kiếm" />
+</form>
+
+
+<div>
+    <table>
+        <tr>
+            <th>Mã hóa đơn</th>
+            <th>Ngày tạo</th>
+            <th>Mã hàng</th>
+            <th>Tên hàng</th>
+            <th>Số lượng</th>
+            <th>Giá nhập</th>
+            <th>Thành tiền</th>
+            <th>Action</th>
+        </tr>
+        @foreach (HoaDonNhapHang hd in Model.dsHoaDonNhap)
+        {
+            <tr>
+                <td>@hd.MaHoaDon</td>
+                <td>@hd.NgayTao</td>
+                <td>@hd.MaHang</td>
+                <td>@hd.TenHang</td>
+                <td>@hd.SoLuong</td>
+                <td>@hd.GiaNhap</td>
+                <td>@hd.ThanhTien</td>
+                <td>
+                    <a href="MH_Sua_MatHang?mahang=@hd.MaHoaDon">Sửa</a>
+                    <a href="MH_Xoa_MatHang?mahang=@hd.MaHoaDon">Xóa</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

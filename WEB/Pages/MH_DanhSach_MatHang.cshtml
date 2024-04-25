@@ -1,0 +1,95 @@
+﻿@page
+@model WEB.Pages.MH_DanhSach_MatHang
+@using Entities;
+@{
+    int currentPage = Request.Query.ContainsKey("page") ? Convert.ToInt32(Request.Query["page"]) : 1;
+    int itemsPerPage = 10;
+    int totalPages = (int)Math.Ceiling((double)Model.totalItems / itemsPerPage);
+    int startIndex = (currentPage - 1) * itemsPerPage;
+    int endIndex = Math.Min(startIndex + itemsPerPage, Model.totalItems);
+    List<MatHang> displayedItems = Model.dsMatHang.GetRange(startIndex, endIndex - startIndex);
+}
+
+<div class="div">
+    <h2 class="h2" style="text-align: center;">Phần mềm quản lý cửa hàng</h2>
+</div>
+
+<div class="div div-space">
+    <a href="MH_DanhSach_MatHang"><button class="button button-highlight">Danh sách mặt hàng</button></a>
+    <a href="MH_DanhSach_LoaiHang"><button class="button">Danh Sách loại hàng</button></a>
+    <a href="MH_DanhSach_HoaDonBan"><button class="button">Hóa đơn bán hàng</button></a>
+    <a href="MH_DanhSach_HoaDonNhap"><button class="button">Hóa đơn nhập hàng</button></a>
+    <a href="MH_DanhSach_MatHang_TonKho"><button class="button">Danh sách tồn kho</button></a>
+    <a href="MH_DanhSach_MatHang_HetHan"><button class="button">Danh sách hết hạn</button></a>
+</div>
+
+<div class="div">
+    <div class="div2">
+        <h2 class="h2">Danh sách mặt hàng</h2>
+        <a href="MH_Them_MatHang"><button class="button-them">Thêm mặt hàng</button></a>
+    </div>
+
+    <div class="form-timkiem">
+        <form method="post">
+            <div area-hidden="true" class="select-tim">
+                <select name="danhsachtimkiem">
+                    <option value="" disabled selected>Tìm kiếm theo</option>
+                    <option name="mahang" value="mahang">Mã hàng</option>
+                    <option name="tenhang" value="tenhang">Tên hàng</option>
+                    <option name="loaihang" value="loaihang">Loại hàng</option>
+                    <option name="congtysanxuat" value="congtysanxuat">Công ty sản xuất</option>
+                </select>
+            </div>
+            <input id="tukhoa" type="text" name="tukhoa" value="" placeholder="Nhập từ khóa ..." /><br />
+            <input type="submit" value="&#128269 Tìm" class="button-tim" />
+        </form>
+    </div>
+
+
+    <div>
+        <table>
+            <tr>
+                <th>Mã hàng</th>
+                <th>Tên hàng</th>
+                <th>Loại hàng</th>
+                <th>Công ty sản xuất</th>
+                <th>Ngày sản xuất</th>
+                <th>Hạn sử dụng</th>
+                <th>Giá bán</th>
+                <th>Action</th>
+            </tr>
+            @foreach (MatHang mh in displayedItems)
+            {
+                <tr>
+                    <td>@mh.MaHang</td>
+                    <td>@mh.TenHang</td>
+                    <td>@mh.LoaiHang</td>
+                    <td>@mh.CongTySanXuat</td>
+                    <td>@mh.NgaySanXuat</td>
+                    <td>@mh.HanDung</td>
+                    <td>@mh.GiaBan</td>
+                    <td>
+                        <a href="MH_Sua_MatHang?mahang=@mh.MaHang">Sửa</a>
+                        <a href="MH_Xoa_MatHang?mahang=@mh.MaHang">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div class="pagination" style="margin: 10px;">
+        @if (totalPages > 1)
+        {
+
+            <a href="?page=1">&laquo; First</a>
+            @for (int i = 1; i <= totalPages; i++)
+            {
+                <a href="?page=@i">@i</a>
+            }
+            <a href="?page=@totalPages">Last &raquo;</a>
+
+        }
+    </div>
+</div>
+
+

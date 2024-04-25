@@ -1,0 +1,15 @@
+14
+1,01-May-23,mh028,Panadol Extra,10,20000,200000
+2,15-Oct-23,mh009,Bia Tiger lon 330ml,50,22000,1100000
+3,08-Sep-23,mh002,Snack tôm Kinh Đô,25,20000,500000
+4,12-Nov-23,mh006,Sữa bột Ensure,28,65000,1820000
+5,26-Jun-23,mh012,Rượu vang đỏ Đà Lạt,32,120000,3840000
+6,10-Nov-23,mh018,Nho đỏ không hạt Crimson,20,140000,2800000
+7,18-Sep-23,mh004,Sữa tươi TH,20,30000,600000
+8,16-Jul-23,mh013,Cafe gói G7,40,7000,280000
+9,02-Mar-23,mh028,Panadol Extra,30,21000,630000
+10,16-Oct-23,mh009,Bia Tiger lon 330ml,35,20000,700000
+11,10-Nov-23,mh022,Gà rán KFC,12,40000,480000
+12,30-Oct-23,mh015,Cam sành,8,35000,280000
+13,10-Aug-23,mh027,Hapacol,30,60000,1800000
+14,21-Sep-23,mh010,Bia Budweiser lon 330ml,62,15000,930000

@@ -1,0 +1,45 @@
+﻿@page
+@model WEB.Pages.MH_DanhSach_LoaiHang
+@using Entities;
+@{
+}
+
+<div class="div">
+    <h2 class="h2" style="text-align: center;">Phần mềm quản lý cửa hàng</h2>
+</div>
+
+<div class="div div-space">
+    <a href="MH_DanhSach_MatHang"><button class="button">Danh sách mặt hàng</button></a>
+    <a href="MH_DanhSach_LoaiHang"><button class="button button-highlight">Danh Sách loại hàng</button></a>
+    <a href="MH_DanhSach_HoaDonBan"><button class="button">Hóa đơn bán hàng</button></a>
+    <a href="MH_DanhSach_HoaDonNhap"><button class="button">Hóa đơn nhập hàng</button></a>
+    <a href="MH_DanhSach_MatHang_TonKho"><button class="button">Danh sách tồn kho</button></a>
+    <a href="MH_DanhSach_MatHang_HetHan"><button class="button">Danh sách hết hạn</button></a>
+</div>
+
+<form method="post">
+    <label for="fname">Từ khóa:</label><br />
+    <input type="text" id="fname" name="tukhoa" value="" />
+    <input type="submit" value="Tìm kiếm" />
+</form>
+
+<div>
+    <table>
+        <tr>
+            <th>Mã Loại Hàng</th>
+            <th>Tên Loại Hàng</th>
+            <th>Action</th>
+        </tr>
+        @foreach (LoaiHang lh in Model.dsLoaiHang)
+        {
+            <tr>
+                <td>@lh.MaLoaiHang</td>
+                <td>@lh.TenLoaiHang</td>
+                <td>
+                    <a href="MH_Sua_LoaiHang?mahang=@lh.MaLoaiHang">Sửa</a>
+                    <a href="MH_Xoa_LoaiHang?mahang=@lh.MaLoaiHang">Xóa</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
