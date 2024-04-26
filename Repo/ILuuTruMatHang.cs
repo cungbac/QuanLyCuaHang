@@ -8,5 +8,6 @@ public interface ILuuTruMatHang
     void LuuDanhSachMatHang(List<MatHang> dsMatHang);
     void ThemMatHang(MatHang matHang);
     void XoaMatHang(MatHang matHang);
+    void CapNhatTonKho(int maHang, int soLuong);
 }
 

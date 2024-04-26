@@ -8,18 +8,46 @@ namespace Services
 	{
 		private ILuuTruMatHang _luuTruMatHang = new LuuTruMatHang();
 
-		public List<MatHang> DocDanhSachMatHang(string tuKhoa = "")
+		public List<MatHang> DocDanhSachMatHang(string timKiemTheo = "tenhang", string tuKhoa = "")
 		{
 			List<MatHang> kq = new List<MatHang>();
 			var dsMatHang = _luuTruMatHang.DocDanhSachMatHang();
 
-			foreach(var matHang in dsMatHang)
+            if (string.IsNullOrEmpty(tuKhoa))
+            {
+                tuKhoa = "";
+            }
+
+			if (timKiemTheo == "loaihang")
 			{
-				if (matHang.TenHang.Contains(tuKhoa))
-				{
-					kq.Add(matHang);
-				}
-			}
+                foreach (var matHang in dsMatHang)
+                {
+                    if (matHang.LoaiHang.Contains(tuKhoa))
+                    {
+                        kq.Add(matHang);
+                    }
+                }
+            }
+			else if (timKiemTheo == "congtysanxuat")
+			{
+                foreach (var matHang in dsMatHang)
+                {
+                    if (matHang.CongTySanXuat.Contains(tuKhoa))
+                    {
+                        kq.Add(matHang);
+                    }
+                }
+            }
+			else
+			{
+                foreach (var matHang in dsMatHang)
+                {
+                    if (matHang.TenHang.Contains(tuKhoa))
+                    {
+                        kq.Add(matHang);
+                    }
+                }
+            }
 
 			return kq;
 		}
@@ -42,6 +70,102 @@ namespace Services
 		public void XoaMatHang(MatHang matHang)
 		{
 			_luuTruMatHang.XoaMatHang(matHang);
+		}
+		public string DocTenMatHang(int maHang)
+		{
+			string kq = string.Empty;
+			var dsMatHang = DocDanhSachMatHang();
+			foreach(var matHang in dsMatHang)
+			{
+				if (matHang.MaHang == maHang)
+				{
+					kq = matHang.TenHang;
+					break;
+				}
+			}
+			return kq;
+		}
+		public bool KiemTraMaHang(int maHang)
+		{
+            var dsMatHang = DocDanhSachMatHang();
+            foreach (var matHang in dsMatHang)
+            {
+                if (matHang.MaHang == maHang)
+                {
+					return true;
+                }
+            }
+			return false;
+        }
+        public List<MatHang> DocDanhSachMatHangTonKho(string timKiemTheo = "tenhang", string tuKhoa = "")
+        {
+            List<MatHang> dsTonKho = new List<MatHang>();
+            List<MatHang> kq = new List<MatHang>();
+            var dsMatHang = _luuTruMatHang.DocDanhSachMatHang();
+
+            if (string.IsNullOrEmpty(tuKhoa))
+            {
+                tuKhoa = "";
+            }
+
+            foreach (var matHang in dsMatHang)
+            {
+                if (matHang.SoLuongTonKho > 0)
+                {
+                    dsTonKho.Add(matHang);
+                }
+            }
+
+            if (timKiemTheo == "loaihang")
+            {
+                foreach (var matHang in dsTonKho)
+                {
+                    if (matHang.LoaiHang.Contains(tuKhoa))
+                    {
+                        kq.Add(matHang);
+                    }
+                }
+            }
+            else if (timKiemTheo == "congtysanxuat")
+            {
+                foreach (var matHang in dsTonKho)
+                {
+                    if (matHang.CongTySanXuat.Contains(tuKhoa))
+                    {
+                        kq.Add(matHang);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var matHang in dsTonKho)
+                {
+                    if (matHang.TenHang.Contains(tuKhoa))
+                    {
+                        kq.Add(matHang);
+                    }
+                }
+            }
+
+            return kq;
+        }
+        public int DocSoLuongTonKho(int maHang)
+		{
+            int kq = 0;
+            var dsMatHang = DocDanhSachMatHang();
+            foreach (var matHang in dsMatHang)
+            {
+                if (matHang.MaHang == maHang)
+                {
+                    kq = matHang.SoLuongTonKho;
+                    break;
+                }
+            }
+            return kq;
+        }
+		public void CapNhatTonKho(int maHang, int soLuong)
+		{
+			_luuTruMatHang.CapNhatTonKho(maHang, soLuong);
 		}
 	}
 }

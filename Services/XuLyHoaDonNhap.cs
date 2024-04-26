@@ -8,16 +8,39 @@ namespace Services
     {
         private ILuuTruHoaDonNhap _luuTruHoaDonNhap = new LuuTruHoaDonNhap();
 
-        public List<HoaDonNhapHang> DocDanhSachHoaDonNhap(string tuKhoa = "")
+        public List<HoaDonNhapHang> DocDanhSachHoaDonNhap(string timKiemTheo, string tuKhoa = "")
         {
             List<HoaDonNhapHang> kq = new List<HoaDonNhapHang>();
             var dsHoaDonNhap = _luuTruHoaDonNhap.DocDanhSachHoaDonNhap();
 
-            foreach (var hoaDonNhap in dsHoaDonNhap)
+            if (timKiemTheo == "mahoadon")
             {
-                if (hoaDonNhap.TenHang.Contains(tuKhoa))
+                foreach (var hoaDonBan in dsHoaDonNhap)
                 {
-                    kq.Add(hoaDonNhap);
+                    if (hoaDonBan.MaHoaDon == int.Parse(tuKhoa))
+                    {
+                        kq.Add(hoaDonBan);
+                    }
+                }
+            }
+            else if (timKiemTheo == "mahang")
+            {
+                foreach (var hoaDonBan in dsHoaDonNhap)
+                {
+                    if (hoaDonBan.MaHang == int.Parse(tuKhoa))
+                    {
+                        kq.Add(hoaDonBan);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var hoaDonNhap in dsHoaDonNhap)
+                {
+                    if (hoaDonNhap.TenHang.Contains(tuKhoa))
+                    {
+                        kq.Add(hoaDonNhap);
+                    }
                 }
             }
 

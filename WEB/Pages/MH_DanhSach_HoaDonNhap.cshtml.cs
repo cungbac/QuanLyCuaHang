@@ -9,18 +9,23 @@ namespace WEB.Pages
     {
         private IXuLyHoaDonNhap _xuLyHoaDonNhap = new XuLyHoaDonNhap();
         public List<HoaDonNhapHang> dsHoaDonNhap;
-        public string chuoi;
+        public int totalItems { get; set; }
+
+        [BindProperty]
+        public string timKiemTheo { get; set; }
 
         [BindProperty]
         public string tuKhoa { get; set; }
 
         public void OnGet()
         {
-            dsHoaDonNhap = _xuLyHoaDonNhap.DocDanhSachHoaDonNhap("");
+            dsHoaDonNhap = _xuLyHoaDonNhap.DocDanhSachHoaDonNhap(timKiemTheo = "tenhang", tuKhoa = "");
+            totalItems = dsHoaDonNhap.Count();
         }
         public void OnPost()
         {
-            dsHoaDonNhap = _xuLyHoaDonNhap.DocDanhSachHoaDonNhap(tuKhoa);
+            dsHoaDonNhap = _xuLyHoaDonNhap.DocDanhSachHoaDonNhap(timKiemTheo, tuKhoa);
+            totalItems = dsHoaDonNhap.Count();
         }
     }
 }

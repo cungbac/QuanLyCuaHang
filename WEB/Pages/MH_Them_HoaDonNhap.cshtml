@@ -1,0 +1,37 @@
+﻿@page
+@model WEB.Pages.MH_Them_HoaDonNhap
+@using Entities;
+@{
+}
+
+<div class="div div-space">
+    <h2>Thêm hoá đơn bán hàng</h2>
+</div>
+
+<div class="div">
+    <form method="post">
+        <label for="mahang" class="label-form">Mã hàng</label>
+        <input id="mahang" type="text" name="mahang" value="" /><br />
+
+        <label for="soluong" class="label-form">Số lượng</label>
+        <input id="soluong" type="text" name="soluong" value="" /><br />
+
+        <label for="giaban" class="label-form">Giá nhập</label>
+        <input id="giaban" type="text" name="giaban" value="" /><br />
+
+        <input type="submit" value="Thêm" class="button-them-sua" />
+    </form>
+</div>
+
+
+@if (Model.message == "Successful")
+{
+    <script>
+        alert("Thêm hoá đơn nhập hàng thành công!");
+        window.location.href = "MH_DanhSach_HoaDonNhap";
+    </script>
+}
+else
+{
+    <h3 class="h3">@Model.message</h3>
+}

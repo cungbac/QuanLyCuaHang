@@ -31,7 +31,8 @@ namespace Repo
             for (int i = 0; i < n; i++)
             {
                 s = reader.ReadLine();
-                dsLoaiHang.Add(new LoaiHang(s));
+                string[] m = s.Split(",");
+                dsLoaiHang.Add(new LoaiHang(m));
             }
             reader.Close();
 

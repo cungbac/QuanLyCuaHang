@@ -8,9 +8,17 @@ namespace Entities
         public int MaLoaiHang { get; set; }
         public string TenLoaiHang { get; set; }
 
-        public LoaiHang(string s)
+        public LoaiHang(string tenLoaiHang)
         {
-            string[] m = s.Split(",");
+            if (string.IsNullOrEmpty(tenLoaiHang))
+            {
+                throw new Exception("Tên loại hàng không được để trống!");
+            }
+            this.TenLoaiHang = tenLoaiHang;
+        }
+
+        public LoaiHang(string[] m)
+        {
             this.MaLoaiHang = int.Parse(m[0]);
             this.TenLoaiHang = m[1];
         }

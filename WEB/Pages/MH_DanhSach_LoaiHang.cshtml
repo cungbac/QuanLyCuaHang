@@ -17,29 +17,36 @@
     <a href="MH_DanhSach_MatHang_HetHan"><button class="button">Danh sách hết hạn</button></a>
 </div>
 
-<form method="post">
-    <label for="fname">Từ khóa:</label><br />
-    <input type="text" id="fname" name="tukhoa" value="" />
-    <input type="submit" value="Tìm kiếm" />
-</form>
+<div class="div">
+    <div class="div2">
+        <h2 class="h2">Danh sách loại hàng</h2>
+        <a href="MH_Them_LoaiHang"><button class="button-them">Thêm loại hàng</button></a>
+    </div>
+    <div class="form-timkiem">
+        <form method="post">
+            <input id="tukhoa" type="text" name="tukhoa" value="" placeholder="Nhập từ khóa ..." /><br />
+            <input type="submit" value="&#128269 Tìm" class="button-tim" />
+        </form>
+    </div>
 
-<div>
-    <table>
-        <tr>
-            <th>Mã Loại Hàng</th>
-            <th>Tên Loại Hàng</th>
-            <th>Action</th>
-        </tr>
-        @foreach (LoaiHang lh in Model.dsLoaiHang)
-        {
+    <div>
+        <table>
             <tr>
-                <td>@lh.MaLoaiHang</td>
-                <td>@lh.TenLoaiHang</td>
-                <td>
-                    <a href="MH_Sua_LoaiHang?mahang=@lh.MaLoaiHang">Sửa</a>
-                    <a href="MH_Xoa_LoaiHang?mahang=@lh.MaLoaiHang">Xóa</a>
-                </td>
+                <th>Mã Loại Hàng</th>
+                <th>Tên Loại Hàng</th>
+                <th>Action</th>
             </tr>
-        }
-    </table>
+            @foreach (LoaiHang lh in Model.dsLoaiHang)
+            {
+                <tr>
+                    <td>@lh.MaLoaiHang</td>
+                    <td>@lh.TenLoaiHang</td>
+                    <td>
+                        <a href="MH_Sua_LoaiHang?mahang=@lh.MaLoaiHang">Sửa</a>
+                        <a href="MH_Xoa_LoaiHang?mahang=@lh.MaLoaiHang">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
 </div>

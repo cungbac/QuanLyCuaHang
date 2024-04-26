@@ -1,7 +1,8 @@
-6
+7
 1,Bánh kẹo
 2,Sữa
 3,Đồ uống
 4,Trái cây
 5,Thức ăn nhanh
 6,Thuốc
+7,Laptop

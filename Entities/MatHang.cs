@@ -29,6 +29,10 @@ public class MatHang
         {
             throw new Exception("Hạn sử dụng nhỏ hơn ngày sản xuất!");
         }
+        if (giaBan < 0)
+        {
+            throw new Exception("Giá bán không hợp lệ!");
+        }
 
         this.TenHang = tenHang;
         this.HanDung = hanDung;

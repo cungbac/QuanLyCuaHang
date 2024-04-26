@@ -1,0 +1,31 @@
+﻿@page
+@model WEB.Pages.MH_Them_LoaiHang
+@using Entities;
+@{
+}
+
+<div class="div div-space">
+    <h2>Thêm loại hàng</h2>
+</div>
+
+<div class="div">
+    <form method="post">
+        <label for="tenloaihang" class="label-form">Tên loại hàng</label>
+        <input id="tenloaihang" type="text" name="tenloaihang" value="" /><br />
+
+        <input type="submit" value="Thêm" class="button-them-sua" />
+    </form>
+</div>
+
+
+@if (Model.message == "Successful")
+{
+    <script>
+        alert("Thêm loại hàng thành công!");
+        window.location.href = "MH_DanhSach_LoaiHang";
+    </script>
+}
+else
+{
+    <h3 class="h3">@Model.message</h3>
+}

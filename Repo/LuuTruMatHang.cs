@@ -70,6 +70,18 @@ namespace Repo
             dsMatHang.Remove(matHang);
             LuuDanhSachMatHang(dsMatHang);
         }
+        public void CapNhatTonKho(int maHang, int soLuong)
+        {
+            List<MatHang> dsMatHang = DocDanhSachMatHang();
+            foreach (var matHang in dsMatHang)
+            {
+                if (matHang.MaHang == maHang)
+                {
+                    matHang.SoLuongTonKho = soLuong;
+                }
+            }
+            LuuDanhSachMatHang(dsMatHang);
+        }
     }
 }
 
