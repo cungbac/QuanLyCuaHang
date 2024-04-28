@@ -10,6 +10,8 @@ namespace Repo
         void LuuDanhSachHoaDonBan(List<HoaDonBanHang> dsHoaDonBan);
         void ThemHoaDonBan(HoaDonBanHang hoaDonBan);
         void XoaHoaDonBan(HoaDonBanHang hoaDonBan);
+        void SuaHoaDonBan(HoaDonBanHang maHoaDon);
+        HoaDonBanHang DocThongTinHoaDon(int maHoaDon);
     }
 }
 

@@ -1,0 +1,38 @@
+﻿@page
+@model WEB.Pages.MH_Sua_LoaiHang
+@using Entities;
+@{
+}
+
+<div class="div div-space">
+    <h2>Sửa loại hàng</h2>
+</div>
+
+<div class="div">
+    @if (Model.loaiHang != null)
+    {
+        <form method="post">
+            <label for="maloaihang" class="label-form">Mã loại hàng</label>
+            <input id="maloaihang" type="text" readonly name="maloaihang" value="@Model.loaiHang.MaLoaiHang"><br>
+
+            <label for="tenloaihang" class="label-form">Tên loại hàng</label>
+            <input id="tenloaihang" type="text" name="tenloaihang" value="@Model.loaiHang.TenLoaiHang" /><br />
+
+            <input type="submit" value="Sửa" class="button-them-sua" />
+        </form>
+
+        @if (Model.message == "Successful")
+        {
+            <script>alert("Sửa loại hàng thành công!");
+                window.location.href = "MH_DanhSach_LoaiHang";</script>
+        }
+        else
+        {
+            <h3 class="h3">@Model.message</h3>
+        }
+    }
+    @if (Model.loaiHang == null)
+    {
+        <h3 class="h3">Loại hàng không tồn tại!</h3>
+    }
+</div>

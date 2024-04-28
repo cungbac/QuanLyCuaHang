@@ -65,6 +65,30 @@ namespace Repo
             dsLoaiHang.Remove(loaiHang);
             LuuDanhSachLoaiHang(dsLoaiHang);
         }
+        public void SuaLoaiHang(LoaiHang loaiHang)
+        {
+            var dsLoaiHang = DocDanhSachLoaiHang();
+            for (int i = 0; i < dsLoaiHang.Count(); i++)
+            {
+                if (dsLoaiHang[i].MaLoaiHang == loaiHang.MaLoaiHang)
+                {
+                    dsLoaiHang[i] = loaiHang;
+                }
+            }
+            LuuDanhSachLoaiHang(dsLoaiHang);
+        }
+        public LoaiHang? DocThongTinLoaiHang(int maLoaiHang)
+        {
+            var dsLoaiHang = DocDanhSachLoaiHang();
+            foreach (var loaiHang in dsLoaiHang)
+            {
+                if (loaiHang.MaLoaiHang == maLoaiHang)
+                {
+                    return loaiHang;
+                }
+            }
+            return null;
+        }
     }
 }
 

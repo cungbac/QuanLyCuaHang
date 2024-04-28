@@ -51,6 +51,7 @@
             <tr>
                 <th>Mã hóa đơn</th>
                 <th>Ngày tạo</th>
+                <th>Ngày cập nhật</th>
                 <th>Mã hàng</th>
                 <th>Tên hàng</th>
                 <th>Số lượng</th>
@@ -63,14 +64,15 @@
                 <tr>
                     <td>@hd.MaHoaDon</td>
                     <td>@hd.NgayTao</td>
+                    <td>@hd.NgayCapNhat</td>
                     <td>@hd.MaHang</td>
                     <td>@hd.TenHang</td>
                     <td>@hd.SoLuong</td>
                     <td>@hd.GiaBan</td>
                     <td>@hd.ThanhTien</td>
                     <td>
-                        <a href="MH_Sua_MatHang?mahang=@hd.MaHoaDon">Sửa</a>
-                        <a href="MH_Xoa_MatHang?mahang=@hd.MaHoaDon">Xóa</a>
+                        <a href="MH_Sua_HoaDonBan?mahoadon=@hd.MaHoaDon">Sửa</a>
+                        <a href="MH_Xoa_HoaDonBan?mahoadon=@hd.MaHoaDon">Xóa</a>
                     </td>
                 </tr>
             }

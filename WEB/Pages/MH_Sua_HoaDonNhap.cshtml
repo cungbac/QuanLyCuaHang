@@ -1,0 +1,49 @@
+﻿@page
+@model WEB.Pages.MH_Sua_HoaDonNhap
+@using Entities;
+@{
+}
+
+<div class="div div-space">
+    <h2>Sửa hoá đơn bán hàng</h2>
+</div>
+
+<div class="div">
+    @if (Model.hoaDonNhap != null)
+    {
+        <form method="post">
+            <label for="mahoadon" class="label-form">Mã hoá đơn</label>
+            <input id="mahoadon" type="text" readonly name="mahoadon" value="@Model.hoaDonNhap.MaHoaDon"><br>
+
+            <label for="mahang" class="label-form">Mã hàng</label>
+            <input id="mahang" type="text" name="mahang" value="@Model.hoaDonNhap.MaHang" /><br />
+
+            <label for="tenhang" class="label-form">Tên mặt hàng</label>
+            <input id="tenhang" type="text" readonly name="tenhang" value="@Model.hoaDonNhap.TenHang" /><br />
+
+            <label for="soluong" class="label-form">Số lượng</label><br />
+            <input id="soluong" type="text" name="soluong" value="@Model.hoaDonNhap.SoLuong" /><br />
+
+            <label for="gianhap" class="label-form">Giá nhập</label>
+            <input id="gianhap" type="text" name="gianhap" value="@Model.hoaDonNhap.GiaNhap" /><br />
+
+            <input type="submit" value="Sửa" class="button-them-sua" />
+        </form>
+
+
+        @if (Model.message == "Successful")
+        {
+            <script>alert("Sửa hoá đơn nhập hàng thành công!");
+                window.location.href = "MH_DanhSach_HoaDonNhap";</script>
+        }
+        else
+        {
+            <h3 class="h3">@Model.message</h3>
+        }
+    }
+    @if (Model.hoaDonNhap == null)
+    {
+        <h3 class="h3">Hoá đơn nhập hàng không tồn tại!</h3>
+    }
+
+</div>

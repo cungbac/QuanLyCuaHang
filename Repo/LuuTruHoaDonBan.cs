@@ -47,6 +47,7 @@ namespace Repo
                 writer.WriteLine($"" +
                     $"{hoaDonBan.MaHoaDon}," +
                     $"{hoaDonBan.NgayTao}," +
+                    $"{hoaDonBan.NgayCapNhat}," +
                     $"{hoaDonBan.MaHang}," +
                     $"{hoaDonBan.TenHang}," +
                     $"{hoaDonBan.SoLuong}," +
@@ -67,6 +68,30 @@ namespace Repo
             List<HoaDonBanHang> dsHoaDonBan = DocDanhSachHoaDonBan();
             dsHoaDonBan.Remove(hoaDonBan);
             LuuDanhSachHoaDonBan(dsHoaDonBan);
+        }
+        public void SuaHoaDonBan(HoaDonBanHang hoaDon)
+        {
+            var dsHoaDon = DocDanhSachHoaDonBan();
+            for (int i = 0; i < dsHoaDon.Count(); i++)
+            {
+                if (dsHoaDon[i].MaHoaDon == hoaDon.MaHoaDon)
+                {
+                    dsHoaDon[i] = hoaDon;
+                }
+            }
+            LuuDanhSachHoaDonBan(dsHoaDon);
+        }
+        public HoaDonBanHang? DocThongTinHoaDon(int maHoaDon)
+        {
+            var dsHoaDon = DocDanhSachHoaDonBan();
+            foreach (var hoaDon in dsHoaDon)
+            {
+                if (hoaDon.MaHoaDon == maHoaDon)
+                {
+                    return hoaDon;
+                }
+            }
+            return null;
         }
     }
 }

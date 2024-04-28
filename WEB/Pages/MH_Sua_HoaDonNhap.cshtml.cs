@@ -5,17 +5,20 @@ using Services;
 
 namespace WEB.Pages
 {
-    public class MH_Them_HoaDonNhap : PageModel
+    public class MH_Sua_HoaDonNhap : PageModel
     {
         private IXuLyHoaDonNhap _xuLyHoaDonNhap = new XuLyHoaDonNhap();
         private IXuLyMatHang _xuLyMatHang = new XuLyMatHang();
 
-        public List<MatHang> dsMatHang;
-        public string message;
+        public List<string> dsTenLoaiHang;
+        public HoaDonNhapHang hoaDonNhap;
+        public int maHoaDon;
         public string tenHang;
         public bool kiemTraMaHang;
         public int soLuongTonKhoHienTai;
         public int soLuongTonKhoMoi;
+
+        public string message;
 
         [BindProperty]
         public string ngayTao { get; set; }
@@ -34,31 +37,39 @@ namespace WEB.Pages
 
         public void OnGet()
         {
+            maHoaDon = int.Parse(Request.Query["mahoadon"]);
+            hoaDonNhap = _xuLyHoaDonNhap.DocThongTinHoaDon(maHoaDon);
         }
         public void OnPost()
         {
             try
             {
+                maHoaDon = int.Parse(Request.Query["mahoadon"]);
+                hoaDonNhap = _xuLyHoaDonNhap.DocThongTinHoaDon(maHoaDon);
+
                 tenHang = _xuLyMatHang.DocTenMatHang(maHang);
-                ngayTao = DateTime.Now.ToString("yyyy-MM-dd");
+                ngayTao = hoaDonNhap.NgayTao;
                 ngayCapNhat = DateTime.Now.ToString("yyyy-MM-dd");
 
                 soLuongTonKhoHienTai = _xuLyMatHang.DocSoLuongTonKho(maHang);
-                soLuongTonKhoMoi = soLuongTonKhoHienTai + soLuong;
+                soLuongTonKhoMoi = soLuongTonKhoHienTai - hoaDonNhap.SoLuong + soLuong;
 
                 kiemTraMaHang = _xuLyMatHang.KiemTraMaHang(maHang);
 
                 if (kiemTraMaHang)
                 {
-                    var hoaDonNhap = new HoaDonNhapHang(ngayTao, ngayCapNhat, maHang, tenHang, soLuong, giaNhap);
-                    _xuLyHoaDonNhap.ThemHoaDonNhap(hoaDonNhap);
+                    var hoaDonMoi = new HoaDonNhapHang(ngayTao, ngayCapNhat, maHang, tenHang, soLuong, giaNhap);
+                    hoaDonMoi.MaHoaDon = maHoaDon;
+                    _xuLyHoaDonNhap.SuaHoaDonNhap(hoaDonMoi);
                     _xuLyMatHang.CapNhatTonKho(maHang, soLuongTonKhoMoi);
+
                     message = "Successful";
                 }
                 else
                 {
                     message = "Mã hàng không tồn tại!";
                 }
+
             }
             catch (Exception ex)
             {

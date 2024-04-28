@@ -5,14 +5,15 @@ using Services;
 
 namespace WEB.Pages
 {
-    public class MH_Them_MatHang : PageModel
+    public class MH_Sua_MatHang : PageModel
     {
         private IXuLyMatHang _xuLyMatHang = new XuLyMatHang();
         private IXuLyLoaiHang _xuLyLoaiHang = new XuLyLoaiHang();
 
-        public List<MatHang> dsMatHang;
-        public string message;
         public List<string> dsTenLoaiHang;
+        public MatHang matHang;
+        public string message;
+        public int maHang;
 
         [BindProperty]
         public string tenHang { get; set; }
@@ -34,15 +35,21 @@ namespace WEB.Pages
 
         public void OnGet()
         {
+            maHang = int.Parse(Request.Query["mahang"]);
+            matHang = _xuLyMatHang.DocThongTinMatHang(maHang);
             dsTenLoaiHang = _xuLyLoaiHang.DocDanhSachTenLoaiHang();
         }
         public void OnPost()
         {
             try
             {
+                maHang = int.Parse(Request.Query["mahang"]);
+                matHang = _xuLyMatHang.DocThongTinMatHang(maHang);
                 dsTenLoaiHang = _xuLyLoaiHang.DocDanhSachTenLoaiHang();
-                var matHang = new MatHang(tenHang, hanDung, congTySanXuat, ngaySanXuat, loaiHang, giaBan);
-                _xuLyMatHang.ThemMatHang(matHang);
+                var matHangMoi = new MatHang(tenHang, hanDung, congTySanXuat, ngaySanXuat, loaiHang, giaBan);
+                matHangMoi.MaHang = maHang;
+                matHangMoi.SoLuongTonKho = matHang.SoLuongTonKho;
+                _xuLyMatHang.SuaMatHang(matHangMoi);
                 message = "Successful";
             }
             catch (Exception ex)

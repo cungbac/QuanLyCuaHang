@@ -25,7 +25,7 @@
         <lable for="loaihang" class="label-form">Loại hàng</lable>
         <select name="loaihang">
             <option value="" disabled selected>Chọn loại hàng</option>
-            @foreach (string tenLoaiHang in Model.dsLoaiHang)
+            @foreach (string tenLoaiHang in Model.dsTenLoaiHang)
             {
                 <option value="@tenLoaiHang">@tenLoaiHang</option>
             }

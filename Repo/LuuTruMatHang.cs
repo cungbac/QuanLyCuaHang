@@ -82,6 +82,30 @@ namespace Repo
             }
             LuuDanhSachMatHang(dsMatHang);
         }
+        public void SuaMatHang(MatHang matHang)
+        {
+            var dsMatHang = DocDanhSachMatHang();
+            for (int i = 0; i < dsMatHang.Count(); i++)
+            {
+                if (dsMatHang[i].MaHang == matHang.MaHang)
+                {
+                    dsMatHang[i] = matHang;
+                }
+            }
+            LuuDanhSachMatHang(dsMatHang);
+        }
+        public MatHang? DocThongTinMatHang(int maHang)
+        {
+            var dsMatHang = DocDanhSachMatHang();
+            foreach (var matHang in dsMatHang)
+            {
+                if (matHang.MaHang == maHang)
+                {
+                    return matHang;
+                }
+            }
+            return null;
+        }
     }
 }
 

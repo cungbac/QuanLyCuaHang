@@ -66,6 +66,15 @@ namespace Services
         {
             _luuTruHoaDonNhap.XoaHoaDonNhap(hoaDonNhap);
         }
+        public void SuaHoaDonNhap(HoaDonNhapHang hoaDonNhap)
+        {
+            _luuTruHoaDonNhap.SuaHoaDonNhap(hoaDonNhap);
+        }
+        public HoaDonNhapHang? DocThongTinHoaDon(int maHoaDon)
+        {
+            HoaDonNhapHang? kq = _luuTruHoaDonNhap.DocThongTinHoaDon(maHoaDon);
+            return kq;
+        }
     }
 }
 

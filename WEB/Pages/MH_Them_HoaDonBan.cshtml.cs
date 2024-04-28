@@ -21,6 +21,9 @@ namespace WEB.Pages
         public string ngayTao { get; set; }
 
         [BindProperty]
+        public string ngayCapNhat { get; set; }
+
+        [BindProperty]
         public int maHang { get; set; }
 
         [BindProperty]
@@ -38,6 +41,7 @@ namespace WEB.Pages
             {
                 tenHang = _xuLyMatHang.DocTenMatHang(maHang);
                 ngayTao = DateTime.Now.ToString("yyyy-MM-dd");
+                ngayCapNhat = DateTime.Now.ToString("yyyy-MM-dd");
                 soLuongTonKhoHienTai = _xuLyMatHang.DocSoLuongTonKho(maHang);
                 soLuongTonKhoMoi = soLuongTonKhoHienTai - soLuong;
 
@@ -47,7 +51,7 @@ namespace WEB.Pages
                 {
                     if (soLuongTonKhoMoi >= 0)
                     {
-                        var hoaDonnBan = new HoaDonBanHang(ngayTao, maHang, tenHang, soLuong, giaBan);
+                        var hoaDonnBan = new HoaDonBanHang(ngayTao, ngayCapNhat, maHang, tenHang, soLuong, giaBan);
                         _xuLyHoaDonBan.ThemHoaDonBan(hoaDonnBan);
                         _xuLyMatHang.CapNhatTonKho(maHang, soLuongTonKhoMoi);
                         message = "Successful";

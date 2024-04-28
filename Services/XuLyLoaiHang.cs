@@ -53,6 +53,15 @@ namespace Services
             }
             return dsTenLoaiHang;
         }
+        public LoaiHang? DocThongTinLoaiHang(int maLoaiHang)
+        {
+            LoaiHang kq = _luuTruLoaiHang.DocThongTinLoaiHang(maLoaiHang);
+            return kq;
+        }
+        public void SuaLoaiHang(LoaiHang loaiHang)
+        {
+            _luuTruLoaiHang.SuaLoaiHang(loaiHang);
+        }
     }
 }
 

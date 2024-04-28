@@ -5,17 +5,20 @@ using Services;
 
 namespace WEB.Pages
 {
-    public class MH_Them_HoaDonNhap : PageModel
+    public class MH_Sua_HoaDonBan : PageModel
     {
-        private IXuLyHoaDonNhap _xuLyHoaDonNhap = new XuLyHoaDonNhap();
+        private IXuLyHoaDonBan _xuLyHoaDonBan = new XuLyHoaDonBan();
         private IXuLyMatHang _xuLyMatHang = new XuLyMatHang();
 
-        public List<MatHang> dsMatHang;
-        public string message;
+        public List<string> dsTenLoaiHang;
+        public HoaDonBanHang hoaDonBan;
+        public int maHoaDon;
         public string tenHang;
         public bool kiemTraMaHang;
         public int soLuongTonKhoHienTai;
         public int soLuongTonKhoMoi;
+
+        public string message;
 
         [BindProperty]
         public string ngayTao { get; set; }
@@ -30,35 +33,50 @@ namespace WEB.Pages
         public int soLuong { get; set; }
 
         [BindProperty]
-        public double giaNhap { get; set; }
+        public double giaBan { get; set; }
 
         public void OnGet()
         {
+            maHoaDon = int.Parse(Request.Query["mahoadon"]);
+            hoaDonBan = _xuLyHoaDonBan.DocThongTinHoaDon(maHoaDon);
         }
         public void OnPost()
         {
             try
             {
+                maHoaDon = int.Parse(Request.Query["mahoadon"]);
+                hoaDonBan = _xuLyHoaDonBan.DocThongTinHoaDon(maHoaDon);
+
                 tenHang = _xuLyMatHang.DocTenMatHang(maHang);
-                ngayTao = DateTime.Now.ToString("yyyy-MM-dd");
+                ngayTao = hoaDonBan.NgayTao;
                 ngayCapNhat = DateTime.Now.ToString("yyyy-MM-dd");
 
                 soLuongTonKhoHienTai = _xuLyMatHang.DocSoLuongTonKho(maHang);
-                soLuongTonKhoMoi = soLuongTonKhoHienTai + soLuong;
+                soLuongTonKhoMoi = soLuongTonKhoHienTai + hoaDonBan.SoLuong - soLuong;
 
                 kiemTraMaHang = _xuLyMatHang.KiemTraMaHang(maHang);
 
                 if (kiemTraMaHang)
                 {
-                    var hoaDonNhap = new HoaDonNhapHang(ngayTao, ngayCapNhat, maHang, tenHang, soLuong, giaNhap);
-                    _xuLyHoaDonNhap.ThemHoaDonNhap(hoaDonNhap);
-                    _xuLyMatHang.CapNhatTonKho(maHang, soLuongTonKhoMoi);
-                    message = "Successful";
+                    if (soLuongTonKhoMoi > 0)
+                    {
+                        var hoaDonMoi = new HoaDonBanHang(ngayTao, ngayCapNhat, maHang, tenHang, soLuong, giaBan);
+                        hoaDonMoi.MaHoaDon = maHoaDon;
+                        _xuLyHoaDonBan.SuaHoaDonBan(hoaDonMoi);
+                        _xuLyMatHang.CapNhatTonKho(maHang, soLuongTonKhoMoi);
+
+                        message = "Successful";
+                    }
+                    else
+                    {
+                        message = "Số lượng bán lớn hơn số lượng tồn kho!";
+                    }
                 }
                 else
                 {
                     message = "Mã hàng không tồn tại!";
                 }
+
             }
             catch (Exception ex)
             {
