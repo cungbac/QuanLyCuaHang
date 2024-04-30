@@ -35,9 +35,20 @@ namespace WEB.Pages
 
         public void OnGet()
         {
-            maHang = int.Parse(Request.Query["mahang"]);
-            matHang = _xuLyMatHang.DocThongTinMatHang(maHang);
-            dsTenLoaiHang = _xuLyLoaiHang.DocDanhSachTenLoaiHang();
+            try
+            {
+                maHang = int.Parse(Request.Query["mahang"]);
+                matHang = _xuLyMatHang.DocThongTinMatHang(maHang);
+                dsTenLoaiHang = _xuLyLoaiHang.DocDanhSachTenLoaiHang();
+                if (matHang == null)
+                {
+                    message = "Mặt hàng không tồn tại!";
+                }
+            }
+            catch
+            {
+                message = "Mặt hàng không tồn tại!";
+            }
         }
         public void OnPost()
         {
@@ -46,10 +57,13 @@ namespace WEB.Pages
                 maHang = int.Parse(Request.Query["mahang"]);
                 matHang = _xuLyMatHang.DocThongTinMatHang(maHang);
                 dsTenLoaiHang = _xuLyLoaiHang.DocDanhSachTenLoaiHang();
+
                 var matHangMoi = new MatHang(tenHang, hanDung, congTySanXuat, ngaySanXuat, loaiHang, giaBan);
                 matHangMoi.MaHang = maHang;
                 matHangMoi.SoLuongTonKho = matHang.SoLuongTonKho;
+
                 _xuLyMatHang.SuaMatHang(matHangMoi);
+
                 message = "Successful";
             }
             catch (Exception ex)

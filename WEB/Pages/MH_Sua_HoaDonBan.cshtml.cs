@@ -37,8 +37,19 @@ namespace WEB.Pages
 
         public void OnGet()
         {
-            maHoaDon = int.Parse(Request.Query["mahoadon"]);
-            hoaDonBan = _xuLyHoaDonBan.DocThongTinHoaDon(maHoaDon);
+            try
+            {
+                maHoaDon = int.Parse(Request.Query["mahoadon"]);
+                hoaDonBan = _xuLyHoaDonBan.DocThongTinHoaDon(maHoaDon);
+                if (hoaDonBan == null)
+                {
+                    message = "Hoá đơn bán hàng không tồn tại!";
+                }
+            }
+            catch
+            {
+                message = "Hoá đơn bán hàng không tồn tại!";
+            }
         }
         public void OnPost()
         {

@@ -2,6 +2,7 @@
 @model WEB.Pages.MH_Sua_MatHang
 @using Entities;
 @{
+    ViewData["Title"] = "Sua mat hang";
 }
 
 <div class="div div-space">
@@ -56,7 +57,7 @@
     }
     @if (Model.matHang == null)
     {
-        <h3 class="h3">Mặt hàng không tồn tại!</h3>
+        <h3 class="h3">@Model.message</h3>
     }
 
 </div>

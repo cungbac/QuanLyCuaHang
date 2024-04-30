@@ -1,0 +1,44 @@
+﻿@page
+@model WEB.Pages.MH_Xoa_LoaiHang
+@using Entities;
+@{
+    ViewData["Title"] = "Xoa loai hang";
+}
+
+<div class="div div-space">
+    <h2>Xoá loại hàng</h2>
+</div>
+
+<div class="div">
+    @if (Model.loaiHang != null)
+    {
+        <div>
+            <p style="font-size: 30px;">Bạn có muốn xóa loại hàng <b style="color: #ff0047">@Model.loaiHang.TenLoaiHang</b> không?</p>
+            <ul>
+                <li><span class="label">Mã loại hàng</span>: @Model.loaiHang.MaLoaiHang</li>
+                <li><span class="label">Tên loại hàng</span>: @Model.loaiHang.TenLoaiHang</li>
+            </ul>
+        </div>
+
+        <div class="button-container">
+            <form method="post">
+                <input type="submit" value="Xóa" class="button-xoa">
+            </form>
+            <a href="MH_DanhSach_LoaiHang"><button class="button-cancel">Cancel</button></a>
+        </div>
+
+        @if (Model.message == "Successful")
+        {
+            <script>alert("Xoá loại hàng thành công!");
+                window.location.href = "MH_DanhSach_LoaiHang";</script>
+        }
+        else
+        {
+            <h3 class="h3">@Model.message</h3>
+        }
+    }
+    @if (Model.loaiHang == null)
+    {
+        <h3 class="h3">@Model.message</h3>
+    }
+</div>

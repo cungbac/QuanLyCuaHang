@@ -1,0 +1,50 @@
+﻿@page
+@model WEB.Pages.MH_Xoa_HoaDonNhap
+@using Entities;
+@{
+    ViewData["Title"] = "Xoa hoa don nhap hang";
+}
+
+<div class="div div-space">
+    <h2>Xoá hoá đơn nhập hàng</h2>
+</div>
+
+<div class="div">
+    @if (Model.hoaDonNhap != null)
+    {
+        <div>
+            <p style="font-size: 30px;">Bạn có muốn xóa hoá đơn <b style="color: #ff0047">@Model.hoaDonNhap.MaHoaDon</b> không?</p>
+            <ul>
+                <li><span class="label">Mã hoá đơn</span>: @Model.hoaDonNhap.MaHoaDon</li>
+                <li><span class="label">Ngảy tạo</span>: @Model.hoaDonNhap.NgayTao</li>
+                <li><span class="label">Ngày cập nhật</span>: @Model.hoaDonNhap.NgayCapNhat</li>
+                <li><span class="label">Mã hàng</span>: @Model.hoaDonNhap.MaHang</li>
+                <li><span class="label">Tên hàng</span>: @Model.hoaDonNhap.TenHang</li>
+                <li><span class="label">Số lượng</span>: @Model.hoaDonNhap.SoLuong</li>
+                <li><span class="label">Giá bán</span>: @Model.hoaDonNhap.GiaNhap</li>
+                <li><span class="label">Thành tiền</span>: @Model.hoaDonNhap.ThanhTien</li>
+            </ul>
+        </div>
+
+        <div class="button-container">
+            <form method="post">
+                <input type="submit" value="Xóa" class="button-xoa">
+            </form>
+            <a href="MH_DanhSach_HoaDonBan"><button class="button-cancel">Cancel</button></a>
+        </div>
+
+        @if (Model.message == "Successful")
+        {
+            <script>alert("Xoá hoá đơn nhập hàng thành công!");
+                window.location.href = "MH_DanhSach_HoaDonNhap";</script>
+        }
+        else
+        {
+            <h3 class="h3">@Model.message</h3>
+        }
+    }
+    @if (Model.hoaDonNhap == null)
+    {
+        <h3 class="h3">@Model.message</h3>
+    }
+</div>

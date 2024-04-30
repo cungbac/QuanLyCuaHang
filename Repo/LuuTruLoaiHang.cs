@@ -59,11 +59,19 @@ namespace Repo
             dsLoaiHang.Add(loaiHang);
             LuuDanhSachLoaiHang(dsLoaiHang);
         }
-        public void XoaLoaiHang(LoaiHang loaiHang)
+        public void XoaLoaiHang(int maLoaiHang)
         {
             List<LoaiHang> dsLoaiHang = DocDanhSachLoaiHang();
-            dsLoaiHang.Remove(loaiHang);
-            LuuDanhSachLoaiHang(dsLoaiHang);
+            List<LoaiHang> dsLoaiHangMoi = new List<LoaiHang>();
+
+            foreach(var loaiHang in dsLoaiHang)
+            {
+                if (loaiHang.MaLoaiHang != maLoaiHang)
+                {
+                    dsLoaiHangMoi.Add(loaiHang);
+                }
+            }
+            LuuDanhSachLoaiHang(dsLoaiHangMoi);
         }
         public void SuaLoaiHang(LoaiHang loaiHang)
         {
@@ -88,6 +96,18 @@ namespace Repo
                 }
             }
             return null;
+        }
+        public bool KiemTraMaLoaiHang(int maLoaiHang)
+        {
+            var dsLoaiHang = DocDanhSachLoaiHang();
+            foreach (var loaiHang in dsLoaiHang)
+            {
+                if (loaiHang.MaLoaiHang == maLoaiHang)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

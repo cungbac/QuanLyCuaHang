@@ -2,6 +2,8 @@
 @model WEB.Pages.MH_DanhSach_MatHang_HetHan
 @using Entities;
 @{
+    ViewData["Title"] = "Danh sach het han";
+
     int currentPage = Request.Query.ContainsKey("page") ? Convert.ToInt32(Request.Query["page"]) : 1;
     int itemsPerPage = 10;
     int totalPages = (int)Math.Ceiling((double)Model.totalItems / itemsPerPage);
@@ -33,7 +35,7 @@
             <div area-hidden="true" class="select-tim">
                 <select name="timkiemtheo">
                     <option value="" disabled selected>Tìm kiếm theo</option>
-                    <option name="mahang" value="tenhang">Mã hàng</option>
+                    <option name="mahang" value="mahang">Mã hàng</option>
                     <option name="tenhang" value="tenhang">Tên hàng</option>
                     <option name="loaihang" value="loaihang">Loại hàng</option>
                     <option name="congtysanxuat" value="congtysanxuat">Công ty sản xuất</option>

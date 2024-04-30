@@ -1,0 +1,49 @@
+﻿@page
+@model WEB.Pages.MH_Xoa_MatHang
+@using Entities;
+@{
+    ViewData["Title"] = "Xoa mat hang";
+}
+
+<div class="div div-space">
+    <h2>Xoá mặt hàng</h2>
+</div>
+
+<div class="div">
+    @if (Model.matHang != null)
+    {
+        <div>
+            <p style="font-size: 30px;">Bạn có muốn xóa mặt hàng <b style="color: #ff0047">@Model.matHang.TenHang</b> không?</p>
+            <ul>
+                <li><span class="label">Mã hàng</span>: @Model.matHang.MaHang</li>
+                <li><span class="label">Tên hàng</span>: @Model.matHang.TenHang</li>
+                <li><span class="label">Loại hàng</span>: @Model.matHang.LoaiHang</li>
+                <li><span class="label">Công ty sản xuất</span>: @Model.matHang.CongTySanXuat</li>
+                <li><span class="label">Ngày sản xuất</span>: @Model.matHang.NgaySanXuat</li>
+                <li><span class="label">Hạn sử dụng</span>: @Model.matHang.HanDung</li>
+                <li><span class="label">Giá bán</span>: @Model.matHang.GiaBan</li>
+            </ul>
+        </div>
+
+        <div class="button-container">
+            <form method="post">
+                <input type="submit" value="Xóa" class="button-xoa">
+            </form>
+            <a href="MH_DanhSach_MatHang"><button class="button-cancel">Cancel</button></a>
+        </div>
+
+        @if (Model.message == "Successful")
+        {
+            <script>alert("Xoá mặt hàng thành công!");
+                window.location.href = "MH_DanhSach_MatHang";</script>
+        }
+        else
+        {
+            <h3 class="h3">@Model.message</h3>
+        }
+    }
+    @if (Model.matHang == null)
+    {
+        <h3 class="h3">@Model.message</h3>
+    }
+</div>

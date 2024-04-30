@@ -63,9 +63,9 @@ namespace Services
 
             _luuTruHoaDonBan.ThemHoaDonBan(hoaDonBan);
         }
-        public void XoaHoaDonBan(HoaDonBanHang hoaDonBan)
+        public void XoaHoaDonBan(int maHoaDon)
         {
-            _luuTruHoaDonBan.XoaHoaDonBan(hoaDonBan);
+            _luuTruHoaDonBan.XoaHoaDonBan(maHoaDon);
         }
         public void SuaHoaDonBan(HoaDonBanHang hoaDonBan)
         {
@@ -75,6 +75,10 @@ namespace Services
         {
             HoaDonBanHang? kq = _luuTruHoaDonBan.DocThongTinHoaDon(maHoaDon);
             return kq;
+        }
+        public bool KiemTraMaHoaDon(int maHoaDon)
+        {
+            return _luuTruHoaDonBan.KiemTraMaHoaDon(maHoaDon);
         }
     }
 }

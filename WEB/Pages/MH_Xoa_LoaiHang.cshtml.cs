@@ -5,7 +5,7 @@ using Services;
 
 namespace WEB.Pages
 {
-    public class MH_Sua_LoaiHang : PageModel
+    public class MH_Xoa_LoaiHang : PageModel
     {
         private IXuLyLoaiHang _xuLyLoaiHang = new XuLyLoaiHang();
 
@@ -13,19 +13,12 @@ namespace WEB.Pages
         public string message;
         public int maLoaiHang;
 
-        [BindProperty]
-        public string tenLoaiHang { get; set; }
-
         public void OnGet()
         {
             try
             {
                 maLoaiHang = int.Parse(Request.Query["maloaihang"]);
                 loaiHang = _xuLyLoaiHang.DocThongTinLoaiHang(maLoaiHang);
-                if (loaiHang == null)
-                {
-                    message = "Loại hàng không tồn tại!";
-                }
             }
             catch
             {
@@ -38,9 +31,7 @@ namespace WEB.Pages
             {
                 maLoaiHang = int.Parse(Request.Query["maloaihang"]);
                 loaiHang = _xuLyLoaiHang.DocThongTinLoaiHang(maLoaiHang);
-                var loaiHangMoi = new LoaiHang(tenLoaiHang);
-                loaiHangMoi.MaLoaiHang = maLoaiHang;
-                _xuLyLoaiHang.SuaLoaiHang(loaiHangMoi);
+                _xuLyLoaiHang.XoaLoaiHang(maLoaiHang);
                 message = "Successful";
             }
             catch (Exception ex)

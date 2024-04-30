@@ -9,18 +9,24 @@ namespace WEB.Pages
     {
         private IXuLyLoaiHang _xuLyLoaiHang = new XuLyLoaiHang();
         public List<LoaiHang> dsLoaiHang;
-        public string chuoi;
+
+        public int totalItems { get; set; }
+
+        [BindProperty]
+        public string timKiemTheo { get; set; }
 
         [BindProperty]
         public string tuKhoa { get; set; }
 
         public void OnGet()
         {
-            dsLoaiHang = _xuLyLoaiHang.DocDanhSachLoaiHang("");
+            dsLoaiHang = _xuLyLoaiHang.DocDanhSachLoaiHang(timKiemTheo = "tenloaihang", "");
+            totalItems = dsLoaiHang.Count();
         }
         public void OnPost()
         {
             dsLoaiHang = _xuLyLoaiHang.DocDanhSachLoaiHang(tuKhoa);
+            totalItems = dsLoaiHang.Count();
         }
     }
 }

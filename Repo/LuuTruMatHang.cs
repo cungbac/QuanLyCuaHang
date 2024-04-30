@@ -64,11 +64,20 @@ namespace Repo
             dsMatHang.Add(matHang);
             LuuDanhSachMatHang(dsMatHang);
         }
-        public void XoaMatHang(MatHang matHang)
+        public void XoaMatHang(int maHang)
         {
             List<MatHang> dsMatHang = DocDanhSachMatHang();
-            dsMatHang.Remove(matHang);
-            LuuDanhSachMatHang(dsMatHang);
+            List<MatHang> dsMatHangMoi = new List<MatHang>();
+
+            foreach (var matHang in dsMatHang)
+            {
+                if (matHang.MaHang != maHang)
+                {
+                    dsMatHangMoi.Add(matHang);
+                }
+            }
+
+            LuuDanhSachMatHang(dsMatHangMoi);
         }
         public void CapNhatTonKho(int maHang, int soLuong)
         {
@@ -105,6 +114,18 @@ namespace Repo
                 }
             }
             return null;
+        }
+        public bool KiemTraMaHang(int maHang)
+        {
+            var dsMatHang = DocDanhSachMatHang();
+            foreach (var matHang in dsMatHang)
+            {
+                if (matHang.MaHang == maHang)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

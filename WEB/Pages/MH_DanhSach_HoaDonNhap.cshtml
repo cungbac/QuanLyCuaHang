@@ -2,6 +2,8 @@
 @model WEB.Pages.MH_DanhSach_HoaDonNhap
 @using Entities;
 @{
+    ViewData["Title"] = "Danh sach hoa don nhap hang";
+
     int currentPage = Request.Query.ContainsKey("page") ? Convert.ToInt32(Request.Query["page"]) : 1;
     int itemsPerPage = 10;
     int totalPages = (int)Math.Ceiling((double)Model.totalItems / itemsPerPage);

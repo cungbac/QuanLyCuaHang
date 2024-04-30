@@ -18,8 +18,18 @@ namespace Services
                 tuKhoa = "";
             }
 
-			if (timKiemTheo == "loaihang")
+			if (timKiemTheo == "mahang")
 			{
+                foreach (var matHang in dsMatHang)
+                {
+                    if (matHang.MaHang == int.Parse(tuKhoa))
+                    {
+                        kq.Add(matHang);
+                    }
+                }
+            }
+            else if (timKiemTheo == "loaihang")
+            {
                 foreach (var matHang in dsMatHang)
                 {
                     if (matHang.LoaiHang.Contains(tuKhoa))
@@ -28,7 +38,7 @@ namespace Services
                     }
                 }
             }
-			else if (timKiemTheo == "congtysanxuat")
+            else if (timKiemTheo == "congtysanxuat")
 			{
                 foreach (var matHang in dsMatHang)
                 {
@@ -67,9 +77,9 @@ namespace Services
 
 			_luuTruMatHang.ThemMatHang(matHang);
 		}
-		public void XoaMatHang(MatHang matHang)
+		public void XoaMatHang(int maHang)
 		{
-			_luuTruMatHang.XoaMatHang(matHang);
+			_luuTruMatHang.XoaMatHang(maHang);
 		}
         public MatHang? DocThongTinMatHang(int maHang)
         {
@@ -93,15 +103,7 @@ namespace Services
 		}
 		public bool KiemTraMaHang(int maHang)
 		{
-            var dsMatHang = DocDanhSachMatHang();
-            foreach (var matHang in dsMatHang)
-            {
-                if (matHang.MaHang == maHang)
-                {
-					return true;
-                }
-            }
-			return false;
+            return _luuTruMatHang.KiemTraMaHang(maHang);
         }
         public List<MatHang> DocDanhSachMatHangTonKho(string timKiemTheo = "tenhang", string tuKhoa = "")
         {
@@ -122,9 +124,19 @@ namespace Services
                 }
             }
 
-            if (timKiemTheo == "loaihang")
+            if (timKiemTheo == "mahang")
             {
-                foreach (var matHang in dsTonKho)
+                foreach (var matHang in dsMatHang)
+                {
+                    if (matHang.MaHang == int.Parse(tuKhoa))
+                    {
+                        kq.Add(matHang);
+                    }
+                }
+            }
+            else if (timKiemTheo == "loaihang")
+            {
+                foreach (var matHang in dsMatHang)
                 {
                     if (matHang.LoaiHang.Contains(tuKhoa))
                     {
@@ -174,9 +186,19 @@ namespace Services
                 }
             }
 
-            if (timKiemTheo == "loaihang")
+            if (timKiemTheo == "mahang")
             {
-                foreach (var matHang in dsHetHan)
+                foreach (var matHang in dsMatHang)
+                {
+                    if (matHang.MaHang == int.Parse(tuKhoa))
+                    {
+                        kq.Add(matHang);
+                    }
+                }
+            }
+            else if (timKiemTheo == "loaihang")
+            {
+                foreach (var matHang in dsMatHang)
                 {
                     if (matHang.LoaiHang.Contains(tuKhoa))
                     {

@@ -8,19 +8,37 @@ namespace Services
     {
         private ILuuTruLoaiHang _luuTruLoaiHang = new LuuTruLoaiHang();
 
-        public List<LoaiHang> DocDanhSachLoaiHang(string tuKhoa = "")
+        public List<LoaiHang> DocDanhSachLoaiHang(string timKiemTheo = "tenloaihang", string tuKhoa = "")
         {
             List<LoaiHang> kq = new List<LoaiHang>();
             var dsLoaiHang = _luuTruLoaiHang.DocDanhSachLoaiHang();
 
-            foreach (var loaiHang in dsLoaiHang)
+            if (string.IsNullOrEmpty(tuKhoa))
             {
-                if (loaiHang.TenLoaiHang.Contains(tuKhoa))
-                {
-                    kq.Add(loaiHang);
-                }
+                tuKhoa = "";
             }
 
+            if (timKiemTheo == "maloaihang")
+            {
+                foreach (var loaiHang in dsLoaiHang)
+                {
+                    if (loaiHang.MaLoaiHang == int.Parse(tuKhoa))
+                    {
+                        kq.Add(loaiHang);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var loaiHang in dsLoaiHang)
+                {
+                    if (loaiHang.TenLoaiHang.Contains(tuKhoa))
+                    {
+                        kq.Add(loaiHang);
+                    }
+                }
+            }
+ 
             return kq;
         }
         public void ThemLoaiHang(LoaiHang loaiHang)
@@ -39,9 +57,9 @@ namespace Services
 
             _luuTruLoaiHang.ThemLoaiHang(loaiHang);
         }
-        public void XoaLoaiHang(LoaiHang loaiHang)
+        public void XoaLoaiHang(int maLoaiHang)
         {
-            _luuTruLoaiHang.XoaLoaiHang(loaiHang);
+            _luuTruLoaiHang.XoaLoaiHang(maLoaiHang);
         }
         public List<string> DocDanhSachTenLoaiHang()
         {
@@ -61,6 +79,10 @@ namespace Services
         public void SuaLoaiHang(LoaiHang loaiHang)
         {
             _luuTruLoaiHang.SuaLoaiHang(loaiHang);
+        }
+        public bool KiemTraMaLoaiHang(int maLoaiHang)
+        {
+            return _luuTruLoaiHang.KiemTraMaLoaiHang(maLoaiHang);
         }
     }
 }

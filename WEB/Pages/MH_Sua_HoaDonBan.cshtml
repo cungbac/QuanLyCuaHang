@@ -2,6 +2,7 @@
 @model WEB.Pages.MH_Sua_HoaDonBan
 @using Entities;
 @{
+    ViewData["Title"] = "Sua hoa don ban hang";
 }
 
 <div class="div div-space">
@@ -43,7 +44,7 @@
     }
     @if (Model.hoaDonBan == null)
     {
-        <h3 class="h3">Hoá đơn bán hàng không tồn tại!</h3>
+        <h3 class="h3">@Model.message</h3>
     }
 
 </div>

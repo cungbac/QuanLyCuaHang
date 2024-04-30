@@ -64,11 +64,20 @@ namespace Repo
             dsHoaDonNhap.Add(hoaDonNhap);
             LuuDanhSachHoaDonNhap(dsHoaDonNhap);
         }
-        public void XoaHoaDonNhap(HoaDonNhapHang hoaDonNhap)
+        public void XoaHoaDonNhap(int maHoaDon)
         {
             List<HoaDonNhapHang> dsHoaDonNhap = DocDanhSachHoaDonNhap();
-            dsHoaDonNhap.Remove(hoaDonNhap);
-            LuuDanhSachHoaDonNhap(dsHoaDonNhap);
+            List<HoaDonNhapHang> dsHoaDonMoi = new List<HoaDonNhapHang>();
+
+            foreach (var hoaDon in dsHoaDonNhap)
+            {
+                if (hoaDon.MaHoaDon != maHoaDon)
+                {
+                    dsHoaDonMoi.Add(hoaDon);
+                }
+            }
+
+            LuuDanhSachHoaDonNhap(dsHoaDonMoi);
         }
         public void SuaHoaDonNhap(HoaDonNhapHang maHoaDon)
         {
@@ -93,6 +102,18 @@ namespace Repo
                 }
             }
             return null;
+        }
+        public bool KiemTraMaHoaDon(int maHoaDon)
+        {
+            var dsHoaDon = DocDanhSachHoaDonNhap();
+            foreach (var hoaDon in dsHoaDon)
+            {
+                if (hoaDon.MaHoaDon == maHoaDon)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
