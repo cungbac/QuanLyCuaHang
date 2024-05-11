@@ -39,7 +39,7 @@ namespace WEB.Pages
                 soLuongTonKhoHienTai = _xuLyMatHang.DocSoLuongTonKho(hoaDonNhap.MaHang);
                 soLuongTonKhoMoi = soLuongTonKhoHienTai - hoaDonNhap.SoLuong;
 
-                if (soLuongTonKhoMoi > 0)
+                if (soLuongTonKhoMoi >= 0)
                 {
                     _xuLyMatHang.CapNhatTonKho(hoaDonNhap.MaHang, soLuongTonKhoMoi);
                     _xuLyHoaDonNhap.XoaHoaDonNhap(maHoaDon);

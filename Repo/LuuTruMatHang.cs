@@ -48,10 +48,10 @@ namespace Repo
                 writer.WriteLine($"" +
                     $"{matHang.MaHang}," +
                     $"{matHang.TenHang}," +
-                    $"{matHang.HanDung}," +
-                    $"{matHang.CongTySanXuat}," +
-                    $"{matHang.NgaySanXuat}," +
                     $"{matHang.LoaiHang}," +
+                    $"{matHang.CongTySanXuat}," +
+                    $"{matHang.HanDung}," +
+                    $"{matHang.NgaySanXuat}," +
                     $"{matHang.GiaBan}," +
                     $"{matHang.SoLuongTonKho}"
                 );

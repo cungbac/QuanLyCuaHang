@@ -9,8 +9,8 @@ namespace WEB.Pages
     {
         private IXuLyHoaDonNhap _xuLyHoaDonNhap = new XuLyHoaDonNhap();
         private IXuLyMatHang _xuLyMatHang = new XuLyMatHang();
+        public IXuLyMatHang layTenMatHang = new XuLyMatHang();
 
-        public List<MatHang> dsMatHang;
         public string message;
         public string tenHang;
         public bool kiemTraMaHang;
@@ -64,6 +64,12 @@ namespace WEB.Pages
             {
                 message = ex.Message;
             }
+        }
+
+        public IActionResult OnGetGetTenHang(int mahang)
+        {
+            var tenHang = _xuLyMatHang.DocTenMatHang(mahang);
+            return new JsonResult(tenHang);
         }
     }
 }

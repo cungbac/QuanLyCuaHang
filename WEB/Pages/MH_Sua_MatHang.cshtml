@@ -19,23 +19,36 @@
             <label for="tenhang" class="label-form">Tên mặt hàng</label>
             <input id="tenhang" type="text" name="tenhang" value="@Model.matHang.TenHang" /><br />
 
-            <label for="handung" class="label-form">Hạn sử dụng</label><br />
-            <input id="handung" type="date" name="handung" value="@Model.matHang.HanDung" placeholder="dd-mm-yyyy" /><br />
-
-            <label for="congtysanxuat" class="label-form">Công ty sản xuất</label>
-            <input id="congtysanxuat" type="text" name="congtysanxuat" value="@Model.matHang.CongTySanXuat" /><br />
-
-            <label for="ngaysanxuat" class="label-form">Ngày sản xuất</label>
-            <input id="ngaysanxuat" type="date" name="ngaysanxuat" value="@Model.matHang.NgaySanXuat" placeholder="dd-mmm-yyyy" /><br />
-
             <lable for="loaihang" class="label-form">Loại hàng</lable>
             <select name="loaihang">
                 <option value="" disabled selected>Chọn loại hàng</option>
                 @foreach (string tenLoaiHang in Model.dsTenLoaiHang)
                 {
-                    <option value="@tenLoaiHang">@tenLoaiHang</option>
+                    if (tenLoaiHang == Model.matHang.LoaiHang)
+                    {
+                        <option value="@tenLoaiHang" selected>@tenLoaiHang</option>
+                    }
+                    else
+                    {
+                        <option value="@tenLoaiHang">@tenLoaiHang</option>
+                    }
                 }
             </select>
+
+            <label for="congtysanxuat" class="label-form">Công ty sản xuất</label>
+            <input id="congtysanxuat" type="text" name="congtysanxuat" value="@Model.matHang.CongTySanXuat" /><br />
+
+
+
+            <label for="handung" class="label-form">Hạn sử dụng</label><br />
+            <input id="handung" type="date" name="handung" value="@Model.matHang.HanDung" placeholder="dd-mm-yyyy" /><br />
+
+
+
+            <label for="ngaysanxuat" class="label-form">Ngày sản xuất</label>
+            <input id="ngaysanxuat" type="date" name="ngaysanxuat" value="@Model.matHang.NgaySanXuat" placeholder="dd-mmm-yyyy" /><br />
+
+
 
             <label for="giaban" class="label-form">Giá bán</label>
             <input id="giaban" type="text" name="giaban" value="@Model.matHang.GiaBan" /><br />
