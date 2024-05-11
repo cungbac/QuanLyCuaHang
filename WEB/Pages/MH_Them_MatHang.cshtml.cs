@@ -41,7 +41,7 @@ namespace WEB.Pages
             try
             {
                 dsTenLoaiHang = _xuLyLoaiHang.DocDanhSachTenLoaiHang();
-                var matHang = new MatHang(tenHang, hanDung, congTySanXuat, ngaySanXuat, loaiHang, giaBan);
+                var matHang = new MatHang(tenHang, loaiHang, congTySanXuat, hanDung, ngaySanXuat, giaBan);
                 _xuLyMatHang.ThemMatHang(matHang);
                 message = "Successful";
             }

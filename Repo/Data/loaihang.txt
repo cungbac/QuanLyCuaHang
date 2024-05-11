@@ -1,8 +1,12 @@
-7
-2,Sữa
-3,Đồ uống
-4,Trái cây
-5,Thức ăn nhanh
-6,Thuốc
-7,Laptop
-8,Văn phòng phẩm
+11
+1,Văn phòng phẩm
+2,Nước ngọt
+3,Bánh kẹo
+4,Thức ăn nhanh
+5,Sữa
+6,Bia
+7,Thực phẩm tươi sống
+8,Snack
+9,Kem
+10,Rau củ quả
+11,Mì ăn liền

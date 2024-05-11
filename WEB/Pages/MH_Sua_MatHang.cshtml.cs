@@ -58,7 +58,7 @@ namespace WEB.Pages
                 matHang = _xuLyMatHang.DocThongTinMatHang(maHang);
                 dsTenLoaiHang = _xuLyLoaiHang.DocDanhSachTenLoaiHang();
 
-                var matHangMoi = new MatHang(tenHang, hanDung, congTySanXuat, ngaySanXuat, loaiHang, giaBan);
+                var matHangMoi = new MatHang(tenHang, loaiHang, congTySanXuat, hanDung, ngaySanXuat, giaBan);
                 matHangMoi.MaHang = maHang;
                 matHangMoi.SoLuongTonKho = matHang.SoLuongTonKho;
 
