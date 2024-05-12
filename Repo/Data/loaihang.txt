@@ -6,8 +6,8 @@
 5,Rau củ
 6,Thức ăn nhanh
 7,Thuốc
-8,Thịt, trứng, cá, hải sản
+8,Hải sản
 9,Bánh kẹo
-10,Nước chấm, gia vị
+10,Nước chấm
 11,Kem
 12,Mì ăn liền

@@ -126,7 +126,7 @@ namespace Services
 
             if (timKiemTheo == "mahang")
             {
-                foreach (var matHang in dsMatHang)
+                foreach (var matHang in dsTonKho)
                 {
                     if (matHang.MaHang == int.Parse(tuKhoa))
                     {
@@ -136,7 +136,7 @@ namespace Services
             }
             else if (timKiemTheo == "loaihang")
             {
-                foreach (var matHang in dsMatHang)
+                foreach (var matHang in dsTonKho)
                 {
                     if (matHang.LoaiHang.Contains(tuKhoa))
                     {
@@ -188,7 +188,7 @@ namespace Services
 
             if (timKiemTheo == "mahang")
             {
-                foreach (var matHang in dsMatHang)
+                foreach (var matHang in dsHetHan)
                 {
                     if (matHang.MaHang == int.Parse(tuKhoa))
                     {
@@ -198,7 +198,7 @@ namespace Services
             }
             else if (timKiemTheo == "loaihang")
             {
-                foreach (var matHang in dsMatHang)
+                foreach (var matHang in dsHetHan)
                 {
                     if (matHang.LoaiHang.Contains(tuKhoa))
                     {

@@ -21,10 +21,6 @@ public class MatHang
         {
             throw new Exception("Tên công ty không được để trống!");
         }
-        if (giaBan < 0)
-        {
-            throw new Exception("Giá bán không hợp lệ!");
-        }
         if (DateOnly.Parse(hanDung) < DateOnly.Parse(ngaySanXuat))
         {
             throw new Exception("Hạn sử dụng nhỏ hơn ngày sản xuất!");
