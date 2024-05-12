@@ -1,16 +1,1 @@
-15
-1,Cocacola,Nước ngọt,Cocacola Vietnam,2024-05-31,2024-01-01,15000,0
-2,Sữa tươi ít đường TH,Sữa,TH True Milk,2024-07-01,2024-05-01,8000,0
-3,Kem sầu riêng,Kem,Merino,2024-05-01,2024-04-01,12000,10
-4,Rau muống,Rau củ quả,MH Agrico,2024-05-02,2024-05-01,5000,0
-5,Mì Hảo Hảo,Mì ăn liền,Acecook,2024-09-30,2024-02-01,7000,0
-6,Snack tôm cay,Snack,Oishi,2024-05-31,2024-05-01,8000,0
-7,Tiger,Bia,Heineken,2025-07-31,2024-01-05,350000,0
-8,Bánh gạo nướng,Bánh kẹo,Orion,2024-07-31,2024-04-15,18000,0
-9,Pocari Sweat,Nước ngọt,Otsuka,2024-08-16,2024-03-07,15000,0
-10,Cá diêu hồng,Thực phẩm tươi sống,Phúc Ann,2024-05-05,2024-05-02,100000,0
-11,Sữa chua nha đam,Sữa,Vinamilk,2024-05-31,2024-05-01,7000,0
-12,Snack vị tảo biển,Snack,Orion,2024-07-30,2024-03-05,11000,0
-13,Hủ tiếu sườn,Mì ăn liền,Masan Consumer,2024-09-15,2024-03-02,12000,0
-14,Kem cây vị socholate,Kem,TH True Milk,2024-04-30,2024-03-05,290000,0
-15,Bia tươi,Bia,Huda,2025-04-30,2024-02-05,200000,0
+0
